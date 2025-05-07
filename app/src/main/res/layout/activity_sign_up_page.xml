@@ -7,34 +7,31 @@
     android:orientation="vertical"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
-    tools:context=".LoginPage"
-    android:gravity="center">
+    android:gravity="center"
+    tools:context=".SignInPage">
 
-    <!-- Title -->
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/signUp_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Create Your Account"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="@color/darkGreen"/>
+        android:textColor="@color/darkGreen" />
 
-    <!-- Google Login Button -->
-    <Button
-        android:id="@+id/btn_google"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signUp_btn_google"
         android:layout_width="360dp"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_marginTop="20dp"
         android:text="Login with Google"
-        android:background="@drawable/border_button"
+        android:background="@drawable/sign_transparent_button"
         android:textColor="@color/black"
-        android:textSize="18sp"/>
+        android:textSize="15sp" />
 
-    <!-- OR Signup with Email Text -->
     <TextView
-        android:id="@+id/tv_email"
+        android:id="@+id/signUp_tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -42,46 +39,44 @@
         android:text="or sign up with email"
         android:textColor="@color/grayish" />
 
-    <!-- Username Input -->
     <EditText
-        android:id="@+id/et_username"
+        android:id="@+id/signUp_et_username"
         android:layout_width="360dp"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/border_et"
+        android:background="@drawable/et_border"
         android:hint="Username"
-        android:paddingLeft="20dp"/>
+        android:paddingStart="20dp" />
 
-    <!-- Email Input -->
     <EditText
-        android:id="@+id/et_email"
-        android:layout_width="360dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/border_et"
-        android:hint="Email address"
-        android:paddingLeft="20dp"
-        android:inputType="textEmailAddress"/>
-
-    <!-- Password Input -->
-    <EditText
-        android:id="@+id/et_password"
+        android:id="@+id/signUp_et_email"
         android:layout_width="360dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/border_et"
-        android:hint="Password"
-        android:paddingLeft="20dp"
-        android:inputType="textPassword"/>
+        android:background="@drawable/et_border"
+        android:hint="Email address"
+        android:paddingStart="20dp"
+        android:inputType="textEmailAddress" />
 
-    <!-- Login Button -->
-    <Button
-        android:id="@+id/btn_login"
+    <EditText
+        android:id="@+id/signUp_et_password"
         android:layout_width="360dp"
         android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/et_border"
+        android:hint="Password"
+        android:paddingStart="20dp"
+        android:inputType="textPassword" />
+
+    <!-- Login Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signUp_btn_signup"
+        android:layout_width="360dp"
+        android:layout_height="65dp"
         android:layout_marginTop="40dp"
-        android:text="Login"
-        android:backgroundTint="@color/darkGreen"
-        android:textSize="22sp"/>
+        android:text="Sign Up"
+        android:background="@drawable/sign_green_button"
+        android:textSize="20sp"
+        android:textColor="@color/white" />
 
 </LinearLayout>

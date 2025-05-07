@@ -4,7 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grayish">#A1A4B2</color>
     <color name="darkGreen">#344E41</color>
-    <color name="darkBlue">#252627</color>
+    <color name="darkGray">#252627</color>
     <color name="cream">#F2E8CF</color>
     <color name="yellow">#FFE100</color>
+    <color name="green">#3A5A40</color>
+    <color name="red">#AF1818</color>
 </resources>

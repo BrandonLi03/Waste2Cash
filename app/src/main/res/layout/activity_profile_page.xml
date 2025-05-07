@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfilePage">
+
+    <View
+        android:id="@+id/v_background"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/darkGreen"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_profile"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/profile_black_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/v_background"
+        app:layout_constraintTop_toBottomOf="@id/v_background"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_name"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
+        android:text="Brandon Li"
+        android:textAllCaps="false"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        android:background="@drawable/profile_cream_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_profile"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_address"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
+        android:text="Binus Square"
+        android:textAllCaps="false"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        android:background="@drawable/profile_cream_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_name"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_phone"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
+        android:text="08123456789"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        android:background="@drawable/profile_cream_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_address"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_logout"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:text="Log Out"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="22sp"
+        android:background="@drawable/profile_red_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_phone"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

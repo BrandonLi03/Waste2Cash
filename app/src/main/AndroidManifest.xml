@@ -13,16 +13,24 @@
         android:theme="@style/Theme.Waste2Cash"
         tools:targetApi="31">
         <activity
-            android:name=".SplashPage"
+            android:name=".ProfilePage"
             android:exported="false" />
+        <activity
+            android:name=".CategoryPage"
+            android:exported="false" />
+        <activity
+            android:name=".HomePage"
+            android:exported="false"
+            android:label="@string/title_activity_home_page"
+            android:theme="@style/Theme.Waste2Cash" />
         <activity
             android:name=".SignUpPage"
             android:exported="false" />
         <activity
-            android:name=".LoginPage"
+            android:name=".SignInPage"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +38,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

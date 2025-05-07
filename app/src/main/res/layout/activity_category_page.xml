@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CategoryPage">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Which Catgory\n Do You Have?"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        android:textSize="26sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_category1"
+        android:layout_width="150dp"
+        android:layout_height="190dp"
+        android:text="Paper"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/category_green_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_category2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_category2"
+        android:layout_width="150dp"
+        android:layout_height="190dp"
+        android:text="glass bottle"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/category_cream_button"
+        app:layout_constraintStart_toEndOf="@+id/btn_category1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_category3"
+        android:layout_width="150dp"
+        android:layout_height="190dp"
+        android:text="Paper"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/category_cream_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_category4"
+        app:layout_constraintTop_toBottomOf="@+id/btn_category1"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_category4"
+        android:layout_width="150dp"
+        android:layout_height="190dp"
+        android:text="glass bottle"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/category_green_button"
+        app:layout_constraintStart_toEndOf="@+id/btn_category3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_category2"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_category5"
+        android:layout_width="150dp"
+        android:layout_height="190dp"
+        android:text="glass bottle"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/category_green_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_category3"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_sendReq"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:background="@drawable/normal_black_button"
+        android:text="Send Request"
+        android:textAllCaps="false"
+        android:textColor="@color/yellow"
+        android:textSize="20sp"
+        android:elevation="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_category5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

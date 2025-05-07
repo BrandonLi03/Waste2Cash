@@ -1,6 +1,10 @@
 package com.example.waste2cash
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,6 +19,21 @@ class SplashPage : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val signIn_btn = findViewById<Button>(R.id.splash_btn_sign_in)
+        val signUp_btn = findViewById<Button>(R.id.splash_btn_sign_up)
+        val img = findViewById<ImageView>(R.id.splash_img)
+        img.setImageResource(R.drawable.splash_img)
+
+        signIn_btn.setOnClickListener {
+            val intent = Intent(this, SignInPage::class.java)
+            startActivity(intent)
+        }
+
+        signUp_btn.setOnClickListener {
+            val intent = Intent(this, SignUpPage::class.java)
+            startActivity(intent)
         }
     }
 }

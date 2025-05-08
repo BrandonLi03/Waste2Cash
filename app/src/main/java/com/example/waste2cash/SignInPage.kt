@@ -31,6 +31,8 @@ class SignInPage : AppCompatActivity() {
 //                Log.d("DATABASE_CHECK", "Email: ${user.email}, Password: ${user.password}")
 //            }
 
+            //halo brandon jelek
+
             if (email == "" || password == "") {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener

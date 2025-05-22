@@ -1,6 +1,8 @@
 package com.example.waste2cash
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,10 +13,17 @@ class CategoryPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_category_page)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        val btnPaper = findViewById<Button>(R.id.btn_category1)
+
+        val userId = intent.getIntExtra("userId", -1)
+
+        btnPaper.setOnClickListener {
+            val intent = Intent(this, FormPage::class.java)
+            intent.putExtra("category", "paper")
+            intent.putExtra("userId", userId)
+            startActivity(intent)
         }
+
     }
 }

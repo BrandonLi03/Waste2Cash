@@ -30,6 +30,7 @@ class SignUpPage : AppCompatActivity() {
             val username = inputUsername.text.toString()
             val email = inputEmail.text.toString()
             val password = inputPassword.text.toString()
+            val userId = intent.getIntExtra("userId", -1)
 
 
             if (email == "" || password == "" || username == "") {
@@ -44,6 +45,8 @@ class SignUpPage : AppCompatActivity() {
 
                 databaseHelper.insertUser(username, email, password)
                 val intent =  Intent(this, SignInPage::class.java)
+                intent.putExtra("username", username)
+                intent.putExtra("userId", userId)
                 startActivity(intent)
                 finish()
             }

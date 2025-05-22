@@ -23,6 +23,7 @@ class HomePage : AppCompatActivity() {
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var databaseHelper: DatabaseHelper
     private lateinit var recyclerView: RecyclerView
+    private lateinit var btnHowToSell : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +36,14 @@ class HomePage : AppCompatActivity() {
         val userName = binding.tvGreetings
         val profile_btn = binding.btnProfile
         val categories_btn = binding.btnCategories
+        val btnHowToSell = binding.btnHowToSell
 
-        val user = intent.getStringExtra("username")
-        userName.text = "Hello, " +  user
+        val username = intent.getStringExtra("username")
+        val userId = intent.getIntExtra("userId", -1)
+        Log.d("DEBUG", "UserId : $userId")
+        Log.d("DEBUG", "username : $username")
+
+        userName.text = "Hello, " +  username
         profile_btn.setOnClickListener {
             val intent = Intent(this, ProfilePage::class.java)
             startActivity(intent)
@@ -45,8 +51,15 @@ class HomePage : AppCompatActivity() {
 
         categories_btn.setOnClickListener {
             val intent = Intent(this, CategoryPage::class.java)
+            intent.putExtra("userId", userId)
             startActivity(intent)
         }
+
+        btnHowToSell.setOnClickListener {
+            val intent = Intent(this, HowToSellPage::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun setUpRecycler(){

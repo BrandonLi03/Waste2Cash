@@ -24,6 +24,8 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
                 "category text," +
                 "quantity integer," +
                 "date text, " +
+                "time text, " +
+                "address text," +
                 "foreign key (userId) references users(userId))"
         db?.execSQL(query)
     }
@@ -36,7 +38,8 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
     }
 
     fun insertCategory(db: SQLiteDatabase?){
-        val query = "insert into categories (categoryName, categoryImg) values ('paper', null)," +
+        val query = "insert into categories (categoryName, categoryImg) values " +
+                "('paper', null)," +
                 "('glass', null)," +
                 "('plastic', null)," +
                 "('metal', null)," +
@@ -46,6 +49,7 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
 
     override fun onCreate(db: SQLiteDatabase?) {
         createUserTable(db)
+        createTransactionTable(db)
         createCategoryTable(db)
         insertCategory(db)
     }
@@ -65,6 +69,19 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
         db.close()
     }
 
+    fun insertTransaction(userId: Int, category: String, quantity: Int ,date: String, time: String, address: String){
+        val db = writableDatabase
+        val cv = ContentValues()
+        cv.put("userId", userId)
+        cv.put("category", category)
+        cv.put("quantity", quantity)
+        cv.put("date", date)
+        cv.put("time", time)
+        cv.put("address", address)
+        db.insert("transactions", null, cv)
+        db.close()
+    }
+
     fun readUser() : MutableList<User>{
         var list : MutableList<User> = ArrayList()
         val db = this.readableDatabase
@@ -73,7 +90,8 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
         if (result.moveToFirst()) {
             do {
                 var user = User()
-                user.userId = result.getString(0).toInt()
+                user.userId = result.getInt(0)
+                user.username = result.getString(1)
                 user.email = result.getString(2)
                 user.password = result.getString(3)
                 list.add(user)

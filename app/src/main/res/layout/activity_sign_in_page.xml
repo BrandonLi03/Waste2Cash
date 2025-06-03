@@ -20,32 +20,13 @@
         android:textStyle="bold"
         android:textColor="@color/darkGreen" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signIn_btn_google"
-        android:layout_width="360dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="20dp"
-        android:text="Login with Google"
-        android:background="@drawable/sign_transparent_button"
-        android:textColor="@color/black"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/signIn_tv_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:text="or login with email"
-        android:textColor="@color/grayish" />
-
     <EditText
-        android:id="@+id/signIn_et_email"
+        android:id="@+id/signIn_et_phoneNumber"
         android:layout_width="360dp"
         android:layout_height="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="35dp"
         android:background="@drawable/et_border"
-        android:hint="Email Address"
+        android:hint="Phone number"
         android:paddingStart="20dp"
         android:inputType="textEmailAddress" />
 

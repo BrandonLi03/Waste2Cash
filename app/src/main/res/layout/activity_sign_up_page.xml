@@ -20,41 +20,22 @@
         android:textStyle="bold"
         android:textColor="@color/darkGreen" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signUp_btn_google"
-        android:layout_width="360dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="20dp"
-        android:text="Login with Google"
-        android:background="@drawable/sign_transparent_button"
-        android:textColor="@color/black"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/signUp_tv_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:text="or sign up with email"
-        android:textColor="@color/grayish" />
-
     <EditText
         android:id="@+id/signUp_et_username"
         android:layout_width="360dp"
         android:layout_height="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="35dp"
         android:background="@drawable/et_border"
         android:hint="Username"
         android:paddingStart="20dp" />
 
     <EditText
-        android:id="@+id/signUp_et_email"
+        android:id="@+id/signUp_et_phoneNumber"
         android:layout_width="360dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/et_border"
-        android:hint="Email address"
+        android:hint="Phone number"
         android:paddingStart="20dp"
         android:inputType="textEmailAddress" />
 
@@ -68,7 +49,6 @@
         android:paddingStart="20dp"
         android:inputType="textPassword" />
 
-    <!-- Login Button -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signUp_btn_signup"
         android:layout_width="360dp"

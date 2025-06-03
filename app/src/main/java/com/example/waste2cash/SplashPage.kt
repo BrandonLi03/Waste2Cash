@@ -23,8 +23,6 @@ class SplashPage : AppCompatActivity() {
 
         val signIn_btn = findViewById<Button>(R.id.splash_btn_sign_in)
         val signUp_btn = findViewById<Button>(R.id.splash_btn_sign_up)
-        val img = findViewById<ImageView>(R.id.splash_img)
-        img.setImageResource(R.drawable.splash_img)
 
         signIn_btn.setOnClickListener {
             val intent = Intent(this, SignInPage::class.java)

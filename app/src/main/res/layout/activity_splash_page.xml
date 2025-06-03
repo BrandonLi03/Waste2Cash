@@ -10,18 +10,18 @@
     <ImageView
         android:id="@+id/splash_img"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="450dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/darkGreen"/>
+        android:background="@drawable/background"/>
 
     <TextView
         android:id="@+id/splash_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Waste2Cash"
-        android:textSize="35sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="@id/splash_img"

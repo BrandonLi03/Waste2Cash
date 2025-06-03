@@ -8,10 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.waste2cash.Database.DatabaseHelper
-import com.example.waste2cash.Model.User
 
 class SignUpPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,20 +17,17 @@ class SignUpPage : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up_page)
 
         val inputUsername = findViewById<EditText>(R.id.signUp_et_username)
-        val inputEmail = findViewById<EditText>(R.id.signUp_et_email)
+        val inputphoneNumber = findViewById<EditText>(R.id.signUp_et_phoneNumber)
         val inputPassword = findViewById<EditText>(R.id.signUp_et_password)
         val signUp_btn = findViewById<Button>(R.id.signUp_btn_signup)
         val databaseHelper = DatabaseHelper(this)
 
-
         signUp_btn.setOnClickListener {
             val username = inputUsername.text.toString()
-            val email = inputEmail.text.toString()
+            val phoneNumber = inputphoneNumber.text.toString().toInt()
             val password = inputPassword.text.toString()
-            val userId = intent.getIntExtra("userId", -1)
 
-
-            if (email == "" || password == "" || username == "") {
+            if (username == "" || phoneNumber == null || password == "") {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -41,12 +35,11 @@ class SignUpPage : AppCompatActivity() {
                 inputPassword.error = "Password must be at least 8 characters"
                 return@setOnClickListener
             }else{
-//                Log.d("DEBUG", "username=$username, email=$email, password=$password")
+                Log.d("DEBUG", "username=$username, phoneNumber=$phoneNumber, password=$password")
 
-                databaseHelper.insertUser(username, email, password)
+                databaseHelper.insertUser(username, phoneNumber, password)
                 val intent =  Intent(this, SignInPage::class.java)
                 intent.putExtra("username", username)
-                intent.putExtra("userId", userId)
                 startActivity(intent)
                 finish()
             }

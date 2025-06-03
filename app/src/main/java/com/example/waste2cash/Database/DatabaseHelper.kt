@@ -11,54 +11,54 @@ import com.example.waste2cash.Model.User
 class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cash", null, 1) {
 
     fun createUserTable(db: SQLiteDatabase?) {
-        val query = "create table if not exists users (userId integer primary key autoincrement, " +
+        val query = "create table if not exists users (userId integer primary key autoincrement," +
                 "username text," +
-                "email text, " +
-                "password text)"
+                "phoneNumber integer," +
+                "password text," +
+                "address text," +
+                "money integer)"
         db?.execSQL(query)
     }
 
-    fun createTransactionTable(db: SQLiteDatabase?){
-        val query = "create table if not exists transactions (transactionId integer primary key autoincrement, " +
+    fun createUserTransactionTable(db: SQLiteDatabase?){
+        val query = "create table if not exists usertransactions (usertransactionId integer primary key autoincrement," +
                 "userId integer," +
-                "category text," +
-                "quantity integer," +
-                "date text, " +
-                "time text, " +
-                "address text," +
+                "categoryId integer," +
+                "weight integer," +
+                "dateTime text," +
                 "foreign key (userId) references users(userId))"
         db?.execSQL(query)
     }
 
     fun createCategoryTable(db: SQLiteDatabase?){
-        val query = "create table if not exists categories (categoryId integer primary key autoincrement, " +
+        val query = "create table if not exists categories (categoryId integer primary key autoincrement," +
                 "categoryName text," +
-                "categoryImg text)"
-        db?.execSQL(query)
-    }
-
-    fun insertCategory(db: SQLiteDatabase?){
-        val query = "insert into categories (categoryName, categoryImg) values " +
-                "('paper', null)," +
-                "('glass', null)," +
-                "('plastic', null)," +
-                "('metal', null)," +
-                "('oil', null)"
+                "categoryPrice integer)"
         db?.execSQL(query)
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
         createUserTable(db)
-        createTransactionTable(db)
+        createUserTransactionTable(db)
         createCategoryTable(db)
+
         insertCategory(db)
     }
 
-    fun insertUser(username: String, email: String, password: String){
+    fun insertCategory(db: SQLiteDatabase?){
+        val query = "insert into categories (categoryName, categoryPrice) values ('Paper', 2000)," +
+                "('Glass Bottle', 3000)," +
+                "('Plastic', 3000)," +
+                "('Metal', 5000)," +
+                "('Oil', 4000)"
+        db?.execSQL(query)
+    }
+
+    fun insertUser(username: String, phoneNumber: Int, password: String){
         val db = writableDatabase
         val cv = ContentValues()
         cv.put("username", username)
-        cv.put("email", email)
+        cv.put("phoneNumber", phoneNumber)
         cv.put("password", password)
         val result = db.insert("users", null, cv)
         if (result == -1.toLong()){
@@ -66,19 +66,6 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
         }else{
             Toast.makeText(context, "Sign Up Successful", Toast.LENGTH_SHORT).show()
         }
-        db.close()
-    }
-
-    fun insertTransaction(userId: Int, category: String, quantity: Int ,date: String, time: String, address: String){
-        val db = writableDatabase
-        val cv = ContentValues()
-        cv.put("userId", userId)
-        cv.put("category", category)
-        cv.put("quantity", quantity)
-        cv.put("date", date)
-        cv.put("time", time)
-        cv.put("address", address)
-        db.insert("transactions", null, cv)
         db.close()
     }
 
@@ -92,10 +79,11 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
                 var user = User()
                 user.userId = result.getInt(0)
                 user.username = result.getString(1)
-                user.email = result.getString(2)
+                user.phoneNumber = result.getInt(2)
                 user.password = result.getString(3)
+                user.address = result.getString(4)
+                user.money = result.getInt(5)
                 list.add(user)
-
             } while (result.moveToNext())
         }
 
@@ -104,29 +92,40 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
         return list
     }
 
-    fun readCategory() : MutableList<Category>{
-        var list : MutableList<Category> = ArrayList()
+    fun getMoney(userId: Int): Int{
         val db = this.readableDatabase
-        val query = "SELECT * FROM categories"
-        var result = db.rawQuery(query, null)
+        val query = "SELECT money FROM users WHERE userId = ?"
+        val cursor = db.rawQuery(query, arrayOf(userId.toString()))
+        var money = 0
 
-        if (result.moveToFirst()) {
-            do {
-                var category = Category()
-                category.categoryId = result.getString(0).toInt()
-                category.categoryName = result.getString(1)
-                category.categoryImg = result.getString(2)?: ""
-                list.add(category)
-            } while (result.moveToNext())
+        if (cursor.moveToFirst()) {
+            money = cursor.getInt(cursor.getColumnIndexOrThrow("money"))
         }
 
-        result.close()
+        cursor.close()
         db.close()
-        return list
+        return money
+    }
+
+    fun insertTransaction(userId: Int, categoryId: Int, weight: Int ,dateTime: String){
+        val db = writableDatabase
+        val cv = ContentValues()
+        cv.put("userId", userId)
+        cv.put("categoryId", categoryId)
+        cv.put("weight", weight)
+        cv.put("dateTime", dateTime)
+        val result = db.insert("usertransactions", null, cv)
+        if (result == -1.toLong()){
+            Toast.makeText(context, "Transaction Failed", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(context, "Transaction Successful", Toast.LENGTH_SHORT).show()
+        }
+        db.close()
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("drop table if exists users")
+        db?.execSQL("drop table if exists usertransactions")
         db?.execSQL("drop table if exists categories")
         onCreate(db)
     }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,7 @@ class SignInPage : AppCompatActivity() {
         val inputemail = findViewById<EditText>(R.id.signIn_et_email)
         val inputpassword = findViewById<EditText>(R.id.signIn_et_password)
         val signIn_btn = findViewById<Button>(R.id.signIn_btn_signin)
+        val signIn_tv_signUp = findViewById<TextView>(R.id.signIn_tv_signup)
 
         signIn_btn.setOnClickListener {
             val email = inputemail.text.toString()
@@ -39,6 +41,7 @@ class SignInPage : AppCompatActivity() {
             if (user != null) {
                 Toast.makeText(this, "Sign In Successful", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, HomePage::class.java)
+                intent.putExtra("userId", user.userId)
                 intent.putExtra("username", user.username)
                 startActivity(intent)
                 finish()
@@ -50,6 +53,12 @@ class SignInPage : AppCompatActivity() {
                     Toast.makeText(this, "Incorrect Password", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        signIn_tv_signUp.setOnClickListener {
+            val intent = Intent(this, SignUpPage::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

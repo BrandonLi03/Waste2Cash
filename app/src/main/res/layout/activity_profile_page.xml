@@ -5,21 +5,31 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfilePage">
+    tools:context=".Pages.ProfilePage">
 
     <View
         android:id="@+id/profile_v_background"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@color/darkGreen"
+        android:background="@drawable/background2"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/back_btn"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/white_back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/profile_btn_profilePicture"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/profile_black_button"
+        android:background="@drawable/profile_picture_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/profile_v_background"
@@ -71,7 +81,7 @@
         android:id="@+id/btn_logout"
         android:layout_width="350dp"
         android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:text="Log Out"
         android:textColor="@color/white"
         android:textAllCaps="false"

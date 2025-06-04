@@ -7,56 +7,73 @@
     android:orientation="vertical"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
-    android:gravity="center"
-    tools:context=".SignInPage">
-
-    <TextView
-        android:id="@+id/signUp_tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Create Your Account"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textColor="@color/darkGreen" />
-
-    <EditText
-        android:id="@+id/signUp_et_username"
-        android:layout_width="360dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/et_border"
-        android:hint="Username"
-        android:paddingStart="20dp" />
-
-    <EditText
-        android:id="@+id/signUp_et_phoneNumber"
-        android:layout_width="360dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/et_border"
-        android:hint="Phone number"
-        android:paddingStart="20dp"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/signUp_et_password"
-        android:layout_width="360dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/et_border"
-        android:hint="Password"
-        android:paddingStart="20dp"
-        android:inputType="textPassword" />
+    android:gravity="center_horizontal"
+    tools:context=".Pages.SignInPage">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signUp_btn_signup"
-        android:layout_width="360dp"
+        android:id="@+id/back_btn"
+        android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginTop="40dp"
-        android:text="Sign Up"
-        android:background="@drawable/sign_green_button"
-        android:textSize="20sp"
-        android:textColor="@color/white" />
+        android:layout_gravity="start|top"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/green_back_button"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="90dp">
+
+        <TextView
+            android:id="@+id/signUp_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Create Your Account"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="@color/darkGreen" />
+
+        <EditText
+            android:id="@+id/signUp_et_username"
+            android:layout_width="360dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/et_border"
+            android:hint="Username"
+            android:paddingStart="20dp" />
+
+        <EditText
+            android:id="@+id/signUp_et_phoneNumber"
+            android:layout_width="360dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/et_border"
+            android:hint="Phone number"
+            android:paddingStart="20dp"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/signUp_et_password"
+            android:layout_width="360dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/et_border"
+            android:hint="Password"
+            android:paddingStart="20dp"
+            android:inputType="textPassword" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signUp_btn_signup"
+            android:layout_width="360dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="40dp"
+            android:text="Sign Up"
+            android:background="@drawable/sign_green_button"
+            android:textSize="20sp"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
 
 </LinearLayout>

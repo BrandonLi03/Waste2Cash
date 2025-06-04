@@ -12,28 +12,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Waste2Cash"
         tools:targetApi="31">
-        <activity
-            android:name=".FormPage"
+        <activity android:name=".Pages.HowToSellPage"
             android:exported="false" />
         <activity
-            android:name=".ProfilePage"
+            android:name=".Pages.FormPage"
             android:exported="false" />
         <activity
-            android:name=".CategoryPage"
+            android:name=".Pages.ProfilePage"
             android:exported="false" />
         <activity
-            android:name=".HomePage"
+            android:name=".Pages.CategoryPage"
+            android:exported="false" />
+        <activity
+            android:name=".Pages.HomePage"
             android:exported="false"
             android:label="@string/title_activity_home_page"
             android:theme="@style/Theme.Waste2Cash" />
         <activity
-            android:name=".SignUpPage"
+            android:name=".Pages.SignUpPage"
             android:exported="false" />
         <activity
-            android:name=".SignInPage"
+            android:name=".Pages.SignInPage"
             android:exported="false" />
         <activity
-            android:name=".SplashPage"
+            android:name=".Pages.SplashPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

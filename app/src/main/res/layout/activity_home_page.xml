@@ -5,14 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePage"
-    android:fitsSystemWindows="true" >
+    tools:context=".Pages.HomePage" >
 
     <View
         android:id="@+id/home_v_background"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/darkGreen"
+        android:layout_height="250dp"
+        android:background="@drawable/background2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -45,7 +44,7 @@
         android:id="@+id/home_btn_profile"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@drawable/profile_black_button"
+        android:background="@drawable/profile_picture_button"
         app:layout_constraintStart_toEndOf="@+id/home_tv_slogan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/home_v_background"
@@ -59,7 +58,7 @@
         android:text="Make Some Money"
         android:textAllCaps="false"
         android:textColor="@color/yellow"
-        android:textSize="20sp"
+        android:textSize="27sp"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="@id/home_v_background"
         app:layout_constraintEnd_toEndOf="parent"
@@ -140,7 +139,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:text="How To Sell :"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -151,16 +150,38 @@
     <ImageButton
         android:id="@+id/home_btn_howToSell"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="115dp"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp"
-        android:src="@drawable/picture"
+        android:src="@drawable/tutorial1"
         android:background="@drawable/category_cream_button"
         android:elevation="10dp"
-        android:scaleType="fitXY"
-
+        android:scaleType="centerCrop"
         app:layout_constraintTop_toBottomOf="@id/home_tv_howToSell"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/home_tv_news"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="News For Today :"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/inter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_btn_howToSell" />
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_rv_news"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_tv_news"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

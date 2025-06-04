@@ -7,65 +7,82 @@
     android:orientation="vertical"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
-    android:gravity="center"
-    tools:context=".SignInPage">
-
-    <TextView
-        android:id="@+id/signIn_tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Welcome Back"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textColor="@color/darkGreen" />
-
-    <EditText
-        android:id="@+id/signIn_et_phoneNumber"
-        android:layout_width="360dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/et_border"
-        android:hint="Phone number"
-        android:paddingStart="20dp"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/signIn_et_password"
-        android:layout_width="360dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/et_border"
-        android:hint="Password"
-        android:paddingStart="20dp"
-        android:inputType="textPassword" />
+    android:gravity="center_horizontal"
+    tools:context=".Pages.SignInPage">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signIn_btn_signin"
-        android:layout_width="360dp"
+        android:id="@+id/back_btn"
+        android:layout_width="65dp"
         android:layout_height="65dp"
+        android:layout_gravity="start|top"
         android:layout_marginTop="20dp"
-        android:text="Sign In"
-        android:background="@drawable/sign_green_button"
-        android:textSize="20sp"
-        android:textColor="@color/white" />
+        android:background="@drawable/green_back_button"/>
 
-    <TextView
-        android:id="@+id/signIn_tv_forgot"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:text="Forgot your password?"
-        android:textColor="@color/grayish" />
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="90dp">
 
-    <TextView
-        android:id="@+id/signIn_tv_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"
-        android:text="You don't have an account yet? Sign Up"
-        android:textColor="@color/grayish" />
+        <TextView
+            android:id="@+id/signIn_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Welcome Back"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="@color/darkGreen" />
+
+        <EditText
+            android:id="@+id/signIn_et_phoneNumber"
+            android:layout_width="360dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/et_border"
+            android:hint="Phone number"
+            android:paddingStart="20dp"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/signIn_et_password"
+            android:layout_width="360dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/et_border"
+            android:hint="Password"
+            android:paddingStart="20dp"
+            android:inputType="textPassword" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signIn_btn_signin"
+            android:layout_width="360dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="20dp"
+            android:text="Sign In"
+            android:background="@drawable/sign_green_button"
+            android:textSize="20sp"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/signIn_tv_forgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="Forgot your password?"
+            android:textColor="@color/grayish" />
+
+        <TextView
+            android:id="@+id/signIn_tv_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:text="You don't have an account yet? Sign Up"
+            android:textColor="@color/grayish" />
+
+    </LinearLayout>
 
 </LinearLayout>

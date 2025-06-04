@@ -5,7 +5,6 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
-import com.example.waste2cash.Model.Category
 import com.example.waste2cash.Model.User
 
 class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cash", null, 1) {
@@ -13,7 +12,7 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
     fun createUserTable(db: SQLiteDatabase?) {
         val query = "create table if not exists users (userId integer primary key autoincrement," +
                 "username text," +
-                "phoneNumber integer," +
+                "phoneNumber text," +
                 "password text," +
                 "address text," +
                 "money integer)"
@@ -26,7 +25,8 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
                 "categoryId integer," +
                 "weight integer," +
                 "dateTime text," +
-                "foreign key (userId) references users(userId))"
+                "foreign key (userId) references users(userId)," +
+                "foreign key(categoryId) references categories(categoryId))"
         db?.execSQL(query)
     }
 
@@ -54,7 +54,7 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
         db?.execSQL(query)
     }
 
-    fun insertUser(username: String, phoneNumber: Int, password: String){
+    fun insertUser(username: String, phoneNumber: String, password: String){
         val db = writableDatabase
         val cv = ContentValues()
         cv.put("username", username)
@@ -79,7 +79,7 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
                 var user = User()
                 user.userId = result.getInt(0)
                 user.username = result.getString(1)
-                user.phoneNumber = result.getInt(2)
+                user.phoneNumber = result.getString(2)
                 user.password = result.getString(3)
                 user.address = result.getString(4)
                 user.money = result.getInt(5)
@@ -90,6 +90,30 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
         result.close()
         db.close()
         return list
+    }
+
+    fun updateUsername(userId: Int, newUsername: String){
+        val db = writableDatabase
+        val cv = ContentValues()
+        cv.put("username", newUsername)
+        db.update("users", cv, "userId = ?", arrayOf(userId.toString()))
+        db.close()
+    }
+
+    fun updateAddress(userId: Int, newAddress: String){
+        val db = writableDatabase
+        val cv = ContentValues()
+        cv.put("address", newAddress)
+        db.update("users", cv, "userId = ?", arrayOf(userId.toString()))
+        db.close()
+    }
+
+    fun updatePhoneNumber(userId: Int, newPhoneNumber: String){
+        val db = writableDatabase
+        val cv = ContentValues()
+        cv.put("phoneNumber", newPhoneNumber)
+        db.update("users", cv, "userId = ?", arrayOf(userId.toString()))
+        db.close()
     }
 
     fun getMoney(userId: Int): Int{
@@ -103,8 +127,39 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
         }
 
         cursor.close()
-        db.close()
         return money
+    }
+
+    fun getCategoryPrice(categoryId: Int): Int {
+        val db = this.readableDatabase
+        val query = "SELECT categoryPrice FROM categories WHERE categoryId = ?"
+        val cursor = db.rawQuery(query, arrayOf(categoryId.toString()))
+        var price = 0
+
+        if (cursor.moveToFirst()) {
+            price = cursor.getInt(cursor.getColumnIndexOrThrow("categoryPrice"))
+        }
+
+        cursor.close()
+        return price
+    }
+
+    fun updateUserMoney(userId: Int, categoryId: Int, weight: Int): Boolean {
+        val db = writableDatabase
+
+        val categoryPrice = getCategoryPrice(categoryId)
+        val totalEarnings = categoryPrice * weight
+
+        val currentMoney = getMoney(userId)
+        val newMoney = currentMoney + totalEarnings
+
+        val cv = ContentValues()
+        cv.put("money", newMoney)
+
+        val result = db.update("users", cv, "userId = ?", arrayOf(userId.toString()))
+        db.close()
+
+        return result > 0
     }
 
     fun insertTransaction(userId: Int, categoryId: Int, weight: Int ,dateTime: String){

@@ -16,9 +16,6 @@
             android:name=".FormPage"
             android:exported="false" />
         <activity
-            android:name=".HowToSellPage"
-            android:exported="false" />
-        <activity
             android:name=".ProfilePage"
             android:exported="false" />
         <activity

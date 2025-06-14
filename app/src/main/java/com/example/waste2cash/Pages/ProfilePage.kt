@@ -15,6 +15,7 @@ class ProfilePage : AppCompatActivity() {
     private lateinit var binding: ActivityProfilePageBinding
     private lateinit var databaseHelper: DatabaseHelper
     private var userId: Int = -1
+    private var userRole: String = "user"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,9 +77,16 @@ class ProfilePage : AppCompatActivity() {
         }
 
         back_btn.setOnClickListener{
-            val intent = Intent(this, HomePage::class.java)
+            val intent: Intent
+
+            if (userRole == "vendor") {
+                intent = Intent(this, HomeAdminPage::class.java)
+            } else {
+                intent = Intent(this, HomePage::class.java)
+            }
             intent.putExtra("userId", userId)
             startActivity(intent)
+            finish()
         }
     }
 
@@ -91,6 +99,7 @@ class ProfilePage : AppCompatActivity() {
                 binding.profileBtnName.text = user.username
                 binding.profileBtnPhone.text = user.phoneNumber
                 binding.profileBtnAddress.text = user.address
+                userRole = user.role
 
                 Log.d("ProfilePage", "Data loaded for user: ${user.username}")
             } else {

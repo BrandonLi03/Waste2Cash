@@ -28,6 +28,8 @@ class SignUpPage : AppCompatActivity() {
             val username = inputUsername.text.toString()
             val phoneNumber = inputphoneNumber.text.toString()
             val password = inputPassword.text.toString()
+            val role = "user"
+            val category = "none"
 
             if (username == "" || phoneNumber == null || password == "") {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
@@ -39,7 +41,7 @@ class SignUpPage : AppCompatActivity() {
             }else{
                 Log.d("DEBUG", "username=$username, phoneNumber=$phoneNumber, password=$password")
 
-                databaseHelper.insertUser(username, phoneNumber, password)
+                databaseHelper.insertUser(username, phoneNumber, password, role, category)
                 val intent =  Intent(this, SignInPage::class.java)
                 intent.putExtra("username", username)
                 startActivity(intent)

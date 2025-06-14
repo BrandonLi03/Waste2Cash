@@ -24,6 +24,20 @@ class SignInPage : AppCompatActivity() {
         val databaseHelper = DatabaseHelper(this)
         val back_btn = findViewById<Button>(R.id.back_btn)
 
+//        to create vendor account
+
+//        val vendorPhoneNumber = "0123"
+//        val vendorPassword = "kertas123"
+//        val vendorUsername = "Vendor Kertas"
+//
+//        val allUsers = databaseHelper.readUser()
+//        val vendorExists = allUsers.any { it.phoneNumber == vendorPhoneNumber && it.role == "vendor" && it.category == "Paper"}
+//
+//        if (!vendorExists) {
+//            databaseHelper.insertUser(vendorUsername, vendorPhoneNumber, vendorPassword, "vendor", "Paper")
+//            Toast.makeText(this, "Akun vendor dibuat!", Toast.LENGTH_LONG).show()
+//        }
+
         signIn_btn.setOnClickListener {
             val phoneNumber = inputphoneNumber.text.toString()
             val password = inputpassword.text.toString()
@@ -34,9 +48,17 @@ class SignInPage : AppCompatActivity() {
                 return@setOnClickListener
             }
             val user = list.find { it.phoneNumber == phoneNumber && it.password == password }
+
             if (user != null) {
                 Toast.makeText(this, "Sign In Successful", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, HomePage::class.java)
+
+                val intent: Intent
+                if (user.role == "vendor") {
+                    intent = Intent(this, HomeAdminPage::class.java)
+                } else {
+                    intent = Intent(this, HomePage::class.java)
+                }
+
                 intent.putExtra("userId", user.userId)
                 intent.putExtra("username", user.username)
                 startActivity(intent)

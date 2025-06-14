@@ -6,5 +6,7 @@ class User (
     var phoneNumber: String = "",
     var password: String = "",
     var address: String? = "",
-    var money: Int? = 0
+    var money: Int? = 0,
+    var role: String = "user",
+    var category: String = "none"
 )

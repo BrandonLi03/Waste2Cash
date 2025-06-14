@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
+import com.example.waste2cash.Model.PickupRequest
 import com.example.waste2cash.Model.User
 
 class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cash", null, 1) {
@@ -15,7 +16,9 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
                 "phoneNumber text," +
                 "password text," +
                 "address text," +
-                "money integer)"
+                "money integer," +
+                "role text default 'user'," +
+                "category text default 'none')"
         db?.execSQL(query)
     }
 
@@ -54,12 +57,14 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
         db?.execSQL(query)
     }
 
-    fun insertUser(username: String, phoneNumber: String, password: String){
+    fun insertUser(username: String, phoneNumber: String, password: String, role: String, category: String){
         val db = writableDatabase
         val cv = ContentValues()
         cv.put("username", username)
         cv.put("phoneNumber", phoneNumber)
         cv.put("password", password)
+        cv.put("role", role)
+        cv.put("category", category)
         val result = db.insert("users", null, cv)
         if (result == -1.toLong()){
             Toast.makeText(context, "Sign Up Failed", Toast.LENGTH_SHORT).show()
@@ -83,6 +88,8 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
                 user.password = result.getString(3)
                 user.address = result.getString(4)
                 user.money = result.getInt(5)
+                user.role = result.getString(6)
+                user.category = result.getString(7)
                 list.add(user)
             } while (result.moveToNext())
         }
@@ -183,5 +190,50 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
         db?.execSQL("drop table if exists usertransactions")
         db?.execSQL("drop table if exists categories")
         onCreate(db)
+    }
+
+    fun getAllPickupRequestsForAdmin(filterCategoryName: String? = null): List<PickupRequest> {
+        val pickupList = mutableListOf<PickupRequest>()
+        val db = this.readableDatabase
+
+        var query = "SELECT " +
+                "T.usertransactionId, " +
+                "T.userId, " +
+                "T.weight, " +
+                "T.dateTime, " +
+                "U.username, " +
+                "U.address, " +
+                "U.phoneNumber, " +
+                "C.categoryName " +
+                "FROM usertransactions T " +
+                "INNER JOIN users U ON T.userId = U.userId " +
+                "INNER JOIN categories C ON T.categoryId = C.categoryId"
+
+        val selectionArgs = mutableListOf<String>()
+
+        if (filterCategoryName != null && filterCategoryName.isNotEmpty() && filterCategoryName != "none") {
+            query += " WHERE LOWER(C.categoryName) = LOWER(?)"
+            selectionArgs.add(filterCategoryName)
+        }
+
+        val cursor = db.rawQuery(query, selectionArgs.toTypedArray())
+
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(0)
+                val userId = cursor.getInt(1)
+                val weight = cursor.getInt(2)
+                val dateTime = cursor.getString(3)
+                val userName = cursor.getString(4)
+                val userAddress = cursor.getString(5)
+                val userPhoneNumber = cursor.getString(6)
+                val categoryName = cursor.getString(7)
+
+                pickupList.add(PickupRequest(id, userId, userName, userAddress, userPhoneNumber, categoryName, weight, dateTime))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return pickupList
     }
 }

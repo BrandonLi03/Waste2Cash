@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Pages.HomeAdminPage">
+
+    <View
+        android:id="@+id/home_v_background"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/background2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/home_tv_greetings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Hello, Name"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/home_v_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/home_v_background" />
+
+    <TextView
+        android:id="@+id/home_tv_slogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/inter"
+        android:text="'Waste to Cash in easy way!'"
+        android:textColor="@color/white"
+        android:textStyle="italic"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_tv_greetings"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/home_btn_profile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/profile_picture_button"
+        app:layout_constraintStart_toEndOf="@+id/home_tv_slogan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/home_v_background"
+        app:layout_constraintBottom_toBottomOf="@id/home_v_background"/>
+
+    <TextView
+        android:id="@+id/tv_vendor"
+        android:layout_width="370dp"
+        android:layout_height="65dp"
+        android:background="@drawable/normal_black_button"
+        android:text="Vendor Barang Bekas"
+        android:textAllCaps="false"
+        android:textColor="@color/yellow"
+        android:textSize="27sp"
+        android:elevation="10dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@id/home_v_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_v_background"/>
+
+    <TextView
+        android:id="@+id/tv_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Permintaan Penjemputan"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_vendor"/>
+
+    <Space
+        android:id="@+id/bottom_spacer"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_request"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_spacer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Waste2Cash"
         tools:targetApi="31">
-        <activity android:name=".Pages.HowToSellPage"
+        <activity
+            android:name=".Pages.ProfileAdminPage"
+            android:exported="false" />
+        <activity
+            android:name=".Pages.HomeAdminPage"
+            android:exported="false" />
+        <activity
+            android:name=".Pages.HowToSellPage"
             android:exported="false" />
         <activity
             android:name=".Pages.FormPage"

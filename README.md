@@ -27,7 +27,7 @@ Waste2Cash is an innovative Kotlin-based application that empowers users to sell
 ### Prerequisites
 
 - Android Studio
-- Kotlin 1.5+
+- Kotlin
 - A device or emulator for testing
 
 ### Installation

@@ -3,6 +3,7 @@ package com.example.waste2cash.Pages
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Adapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.waste2cash.Adapter.PickupRequestAdapter
 import com.example.waste2cash.Database.DatabaseHelper
+import com.example.waste2cash.Model.PickupRequest
 import com.example.waste2cash.R
 import com.example.waste2cash.databinding.ActivityHomeAdminPageBinding
 import com.example.waste2cash.databinding.ActivityHomePageBinding
@@ -58,7 +60,20 @@ class HomeAdminPage : AppCompatActivity() {
 
         val pickupRequests = databaseHelper.getAllPickupRequestsForAdmin(jenisVendor)
 
-        pickupRequestAdapter = PickupRequestAdapter(pickupRequests)
+        pickupRequestAdapter = PickupRequestAdapter(pickupRequests, object : PickupRequestAdapter.OnBuyClickListener {
+            override fun onBuyClick(pickupRequest: PickupRequest) {
+                val success = databaseHelper.markTransactionAsSold(pickupRequest.id)
+
+                if (success) {
+                    Toast.makeText(this@HomeAdminPage, "Berhasil membeli barang.", Toast.LENGTH_LONG).show()
+                    // Refresh data dari database
+                    val newList = databaseHelper.getAllPickupRequestsForAdmin()
+                    pickupRequestRecyclerView.adapter = PickupRequestAdapter(newList, this)
+                } else {
+                    Toast.makeText(this@HomeAdminPage, "Gagal membeli barang.", Toast.LENGTH_LONG).show()
+                }
+            }
+        })
         pickupRequestRecyclerView.adapter = pickupRequestAdapter
 
         if (pickupRequests.isEmpty()) {

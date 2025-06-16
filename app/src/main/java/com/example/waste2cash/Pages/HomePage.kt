@@ -7,9 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.waste2cash.Database.DatabaseHelper
 import com.example.waste2cash.databinding.ActivityHomePageBinding
-//import com.kwabenaberko.newsapilib.NewsApiClient
-//import com.kwabenaberko.newsapilib.models.request.TopHeadlinesRequest
-//import com.kwabenaberko.newsapilib.models.response.ArticleResponse
 
 class HomePage : AppCompatActivity() {
 
@@ -31,7 +28,6 @@ class HomePage : AppCompatActivity() {
         val plastic_btn = binding.homeBtnPlastic
         val more_btn = binding.homeBtnMore
         val howToSell_btn = binding.homeBtnHowToSell
-        val news_rv = binding.homeRvNews
         var username = ""
 
         val userId = intent.getIntExtra("userId", -1)
@@ -87,26 +83,4 @@ class HomePage : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-
-//    fun getNews() {
-//        val newsApiClient = NewsApiClient("66d1125824cc46b2a757c2c49c4f1f6b")
-//
-//        newsApiClient.getTopHeadlines(
-//            TopHeadlinesRequest.Builder()
-//                .language("en")
-//                .build(),
-//            object : NewsApiClient.ArticlesResponseCallback {
-//                override fun onSuccess(response: ArticleResponse) {
-//                    response.articles.forEach { article ->
-//                        Log.i("Article", article.title)
-//                    }
-//                }
-//
-//                override fun onFailure(throwable: Throwable) {
-//                    Log.i("GOT Failure", throwable.message ?: "Unknown error")
-//                }
-//            }
-//        )
-//    }
 }

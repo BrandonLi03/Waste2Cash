@@ -24,19 +24,16 @@ class SignInPage : AppCompatActivity() {
         val databaseHelper = DatabaseHelper(this)
         val back_btn = findViewById<Button>(R.id.back_btn)
 
-//        to create vendor account
+        val vendorPhoneNumber = "0123"
+        val vendorPassword = "kertas123"
+        val vendorUsername = "Vendor Kertas"
 
-//        val vendorPhoneNumber = "0123"
-//        val vendorPassword = "kertas123"
-//        val vendorUsername = "Vendor Kertas"
-//
-//        val allUsers = databaseHelper.readUser()
-//        val vendorExists = allUsers.any { it.phoneNumber == vendorPhoneNumber && it.role == "vendor" && it.category == "Paper"}
-//
-//        if (!vendorExists) {
-//            databaseHelper.insertUser(vendorUsername, vendorPhoneNumber, vendorPassword, "vendor", "Paper")
-//            Toast.makeText(this, "Akun vendor dibuat!", Toast.LENGTH_LONG).show()
-//        }
+        val allUsers = databaseHelper.readUser()
+        val vendorExists = allUsers.any { it.phoneNumber == vendorPhoneNumber && it.role == "vendor" && it.category == "Paper"}
+
+        if (!vendorExists) {
+            databaseHelper.insertUser(vendorUsername, vendorPhoneNumber, vendorPassword, "vendor", "Paper")
+        }
 
         signIn_btn.setOnClickListener {
             val phoneNumber = inputphoneNumber.text.toString()

@@ -37,7 +37,6 @@ class FormPage : AppCompatActivity() {
                 databaseHelper.insertTransaction(userId, categoryId, weight, dateTime)
                 Toast.makeText(this, "Request Sent", Toast.LENGTH_SHORT).show()
                 Log.d("DEBUG", "userId=$userId, categoryId=$categoryId, weight=$weight, dateTime=$dateTime")
-                databaseHelper.updateUserMoney(userId, categoryId, weight)
                 val intent = Intent(this, HomePage::class.java)
                 intent.putExtra("userId", userId)
                 startActivity(intent)

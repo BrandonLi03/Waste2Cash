@@ -39,12 +39,32 @@
             android:textSize="18sp"
             android:text="Alamat"/>
 
-        <TextView
-            android:id="@+id/tv_nomor_telp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="Nomor Telepon"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_nomor_telp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="18sp"
+                android:text="Nomor Telepon"/>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy"
+                android:background="@drawable/sign_green_button"
+                android:textSize="18sp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -28,6 +28,7 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
                 "categoryId integer," +
                 "weight integer," +
                 "dateTime text," +
+                "status TEXT DEFAULT 'sale'," +
                 "foreign key (userId) references users(userId)," +
                 "foreign key(categoryId) references categories(categoryId))"
         db?.execSQL(query)
@@ -40,14 +41,6 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
         db?.execSQL(query)
     }
 
-    override fun onCreate(db: SQLiteDatabase?) {
-        createUserTable(db)
-        createUserTransactionTable(db)
-        createCategoryTable(db)
-
-        insertCategory(db)
-    }
-
     fun insertCategory(db: SQLiteDatabase?){
         val query = "insert into categories (categoryName, categoryPrice) values ('Paper', 2000)," +
                 "('Glass Bottle', 3000)," +
@@ -55,6 +48,14 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
                 "('Metal', 5000)," +
                 "('Oil', 4000)"
         db?.execSQL(query)
+    }
+
+    override fun onCreate(db: SQLiteDatabase?) {
+        createUserTable(db)
+        createUserTransactionTable(db)
+        createCategoryTable(db)
+
+        insertCategory(db)
     }
 
     fun insertUser(username: String, phoneNumber: String, password: String, role: String, category: String){
@@ -123,6 +124,23 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
         db.close()
     }
 
+    fun insertTransaction(userId: Int, categoryId: Int, weight: Int ,dateTime: String){
+        val db = writableDatabase
+        val cv = ContentValues()
+        cv.put("userId", userId)
+        cv.put("categoryId", categoryId)
+        cv.put("weight", weight)
+        cv.put("dateTime", dateTime)
+        cv.put("status", "sale")
+        val result = db.insert("usertransactions", null, cv)
+        if (result == -1.toLong()){
+            Toast.makeText(context, "Transaction Failed", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(context, "Transaction Successful", Toast.LENGTH_SHORT).show()
+        }
+        db.close()
+    }
+
     fun getMoney(userId: Int): Int{
         val db = this.readableDatabase
         val query = "SELECT money FROM users WHERE userId = ?"
@@ -164,32 +182,40 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
         cv.put("money", newMoney)
 
         val result = db.update("users", cv, "userId = ?", arrayOf(userId.toString()))
-        db.close()
 
         return result > 0
     }
 
-    fun insertTransaction(userId: Int, categoryId: Int, weight: Int ,dateTime: String){
+    fun markTransactionAsSold(transactionId: Int): Boolean {
         val db = writableDatabase
-        val cv = ContentValues()
-        cv.put("userId", userId)
-        cv.put("categoryId", categoryId)
-        cv.put("weight", weight)
-        cv.put("dateTime", dateTime)
-        val result = db.insert("usertransactions", null, cv)
-        if (result == -1.toLong()){
-            Toast.makeText(context, "Transaction Failed", Toast.LENGTH_SHORT).show()
-        }else{
-            Toast.makeText(context, "Transaction Successful", Toast.LENGTH_SHORT).show()
-        }
-        db.close()
-    }
+        val cursor = db.rawQuery(
+            "SELECT userId, categoryId, weight FROM usertransactions WHERE usertransactionId = ?",
+            arrayOf(transactionId.toString())
+        )
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL("drop table if exists users")
-        db?.execSQL("drop table if exists usertransactions")
-        db?.execSQL("drop table if exists categories")
-        onCreate(db)
+        if (!cursor.moveToFirst()) {
+            cursor.close()
+            db.close()
+            return false
+        }
+
+        val userId = cursor.getInt(0)
+        val categoryId = cursor.getInt(1)
+        val weight = cursor.getInt(2)
+        cursor.close()
+
+        val success = updateUserMoney(userId, categoryId, weight)
+        if (!success) {
+            db.close()
+            return false
+        }
+
+        val cv = ContentValues()
+        cv.put("status", "sold")
+        val result = db.update("usertransactions", cv, "usertransactionId = ?", arrayOf(transactionId.toString()))
+
+        db.close()
+        return result > 0
     }
 
     fun getAllPickupRequestsForAdmin(filterCategoryName: String? = null): List<PickupRequest> {
@@ -207,12 +233,12 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
                 "C.categoryName " +
                 "FROM usertransactions T " +
                 "INNER JOIN users U ON T.userId = U.userId " +
-                "INNER JOIN categories C ON T.categoryId = C.categoryId"
-
+                "INNER JOIN categories C ON T.categoryId = C.categoryId " +
+                "WHERE T.status = 'sale'"
         val selectionArgs = mutableListOf<String>()
 
-        if (filterCategoryName != null && filterCategoryName.isNotEmpty() && filterCategoryName != "none") {
-            query += " WHERE LOWER(C.categoryName) = LOWER(?)"
+        if (!filterCategoryName.isNullOrEmpty() && filterCategoryName.lowercase() != "none") {
+            query += " AND LOWER(C.categoryName) = LOWER(?)"
             selectionArgs.add(filterCategoryName)
         }
 
@@ -232,8 +258,17 @@ class DatabaseHelper(var context: Context): SQLiteOpenHelper(context, "waste2cas
                 pickupList.add(PickupRequest(id, userId, userName, userAddress, userPhoneNumber, categoryName, weight, dateTime))
             } while (cursor.moveToNext())
         }
+
         cursor.close()
         db.close()
         return pickupList
+    }
+
+
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        db?.execSQL("drop table if exists users")
+        db?.execSQL("drop table if exists usertransactions")
+        db?.execSQL("drop table if exists categories")
+        onCreate(db)
     }
 }
